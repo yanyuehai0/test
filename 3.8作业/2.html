@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let height = +prompt('请输入身高(cm)')
+        let weight = +prompt('请输入体重(kg)')
+
+        if (isNaN(height)) {
+            alert('请输入合法身高')
+        } else if (isNaN(weight)) {
+            alert('请输入合法体重')
+        } else {
+            height = height / 100
+            let bmi = weight / (height * height)
+            userBmi(bmi)
+        }
+
+        function userBmi(bmi) {
+            if (bmi >= 31) {
+                document.write('太胖了')
+            } else if (bmi >= 24) {
+                document.write('偏重')
+            } else if (bmi >= 18.5) {
+                document.write('正常的')
+            } else if (bmi < 18.5) {
+                document.write('太瘦了')
+            }
+        }
+
+    </script>
+</body>
+
+</html>

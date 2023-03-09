@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.水仙花数
+        // 水仙花数”是指一个三位数，其各位数字的立方和确好等于该数本身，如；153＝1 * 1 * 1＋5 * 5 * 5＋3 * 3 * 3，则153是一个“水仙花数”
+        // 求出100 - 999 
+
+        for (let i = 100; i <= 300; i++) {
+            countDaffodil(i)
+        }
+
+        function countDaffodil(i) {
+            // let num1, num2, num3
+            let num1 = parseInt(i / 100)
+            let num2 = parseInt(i / 10) % 10
+            let num3 = i % 100 % 10
+
+            num1 = num1 ** 3
+            num2 = num2 ** 3
+            num3 = num3 ** 3
+
+            if ((num1 + num2 + num3) === i) {
+                console.log(i);
+            }
+        }
+    </script>
+</body>
+
+</html>

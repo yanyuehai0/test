@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let year = +prompt('请输入年份')
+        if (isNaN(year)) {
+            alert('输入不合法，请输入年份')
+        } else if (year % 100 === 0) {
+            if (year % 400 === 0) {
+                document.write(year + '是闰年')
+            } else {
+                document.write(year + '不是闰年')
+            }
+
+        } else if (year % 4 === 0) {
+            document.write(year + '是闰年')
+        } else {
+            document.write(year + '不是闰年')
+        }
+    </script>
+</body>
+
+</html>
