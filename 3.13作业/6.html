@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        //   6. 编写一个函数， 传入一个对象（对象的属性值全是string类型）为参数。返回 交换键和值后的一个新对象
+        //   例如 { name：“jack”，age：three } => { jack: "name", three: "age" }
+
+
+        
+        function contraryObj(obj) {
+            let newObj = {}
+            for (const k in obj) {
+                newObj[obj[k]] = k
+            }
+
+
+            return newObj
+        }
+
+        let obj = { name: "zs", age: "two" }
+        console.log(contraryObj(obj));
+
+    </script>
+
+</body>
+
+</html>

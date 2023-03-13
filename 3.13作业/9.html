@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+    // 3.声明一个函数，传入一个纯数字的数组作为形参。返回该数组中元素的平均值
+    function arrAll(arr){
+        let sum = 0
+        for(let i = 0; i < arr.length; i++){
+            sum += arr[i]
+        }
+
+        return sum / arr.length
+    }
+
+    console.log(arrAll([1,2,3,4,5,6,7,8,9]));
+
+    </script>
+</body>
+
+</html>

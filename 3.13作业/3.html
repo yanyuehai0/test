@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 3. 写函数, 把传过来的列表中的每一个元素都用"_"拼接, 并返回
+        function joint(){
+            let joint = ''
+            for(let i = 0; i < arguments.length; i++){
+                joint = joint + arguments[i] + '_'
+            }
+
+            return joint
+        }
+
+        console.log(joint(1,2,3,4,5,6));
+
+    </script>
+
+</body>
+
+</html>

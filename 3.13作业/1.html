@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 1.某个公司采用公用电话传递数据，数据是四位的整数，在传递过程中是加密的，
+        // 加密规则如下：每位数字都加上5, 然后用除以10的余数代替该数字，再将第一位和第四位交换，
+        // 第二位和第三位交换，请编写一个函数，传入原文，输出密文
+
+        function password(pws){
+            let one = parseInt(pws / 1000)
+            let two = parseInt(pws / 100) % 10
+            let three = parseInt(pws / 10) % 10
+            let four = pws % 10
+
+            return `${(four + 5) % 10} ${(three + 5) % 10} ${(two+5) % 10} ${(one+5) % 10}` 
+        }
+
+
+        console.log(password(1112));
+
+    </script>
+
+</body>
+
+</html>

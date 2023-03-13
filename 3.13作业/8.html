@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+    // 2.给你一个函数的调用f1({m:1,n:2,c:3}) 声明一个函数实现f1({m:1,n:2,c:3})的返回值为(1+2+3)
+    function objValue(obj){
+        let value = 0
+        let stringVlaue = ''
+        let  i = 1
+        for (const k in obj) {
+           
+            value += obj[k]
+            if(i < 3){
+                stringVlaue = stringVlaue + obj[k] + '+'
+            }else{
+                stringVlaue = stringVlaue + obj[k]
+            }
+
+            i++
+        }
+
+        return stringVlaue + '=' + value
+    }
+
+
+    let obj = {
+        one : 1,
+        two : 2,
+        three : 3
+    }
+
+    console.log(objValue(obj));
+
+    </script>
+
+</body>
+
+</html>

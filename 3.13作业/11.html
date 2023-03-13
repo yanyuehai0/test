@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+    //     5. 声明一个函数，传入一个数值和一个数组，判断数组中有没有某个元素等于这个数值，如果有返回true否则返回false
+    //  例如传入 1 ，{ 2, 3, 5, 6，“a” ，1 }  返回 true
+    //     传入 “b”，{“a”, "c", 1, 3, 4 }   返回 false
+
+    function estimate(n, arr){
+        let isbool = false
+        for(let i = 0; i < arr.length; i++){
+            if(n === arr[i]){
+                isbool = true
+            }
+        }
+
+        return isbool
+    }
+
+    console.log(estimate(5, [1,2,3,6,8,5
+]));
+
+    </script>
+</body>
+
+</html>

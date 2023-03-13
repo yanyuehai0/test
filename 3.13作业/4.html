@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+        // 4.写一个函数，传入一个数组为参数。 返回 一个对象，对象属性包含 这个 数组中元素的最大值，平均值， 最小值;
+        //  例如 { max：“”，min：“”，average：“” }
+
+        function arrobj(arr){
+            let obj = {
+                max: arr[0],
+                meanValue: arr[0],
+                min: arr[0]
+            }
+
+            let sum = arr[0]
+
+            for(let i = 0; i < arr.length; i++){
+                if(obj.max < arr[i]){
+                    obj.max = arr[i]
+                }else{
+                    obj.min = arr[i]
+                }
+                sum += arr[i]
+            }
+
+            obj.meanValue = sum / arr.length
+
+            return obj
+        }
+
+        console.log(arrobj([1,2,3,4,5,6]));
+
+    </script>
+
+</body>
+
+</html>

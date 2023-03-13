@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 4.声明一个函数, 传入一个对象作为形参，返回该对象中所有属性名拼接起来的字符串
+        // 例如  { name: "", age: "", data: "" }=> name + age + data
+
+        function nameJoint(obj){
+            let nameVlaue = ''
+            for (const k in obj) {
+                nameVlaue = nameVlaue + k
+            }
+
+            return nameVlaue
+        }
+
+
+        console.log(nameJoint({ name: "", age: "", data: "" }));
+
+    </script>
+
+</body>
+
+</html>
