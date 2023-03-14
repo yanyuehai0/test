@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 4. 封装一个函数,传入两个参数，就出位于这个两个参数之间的三个随机数
+
+        // 传入参数差值必须超过0.03
+
+        function threeRandom(num1, num2) {
+            // 传入第一个随机数
+            let randoms = []
+
+            randoms[0] = random(num1, num2)
+
+            // 判断随机数是否重复
+            for (let i = 0; i < 2;) {
+
+                let res1 = random(num1, num2)
+                let res2 = ''
+
+                for (let j = 0; j <= randoms.length; j++) {
+
+                    if (res1 === randoms[j]) {
+                        break
+                    } else if (randoms[j] === undefined) {
+                        res2 = res1
+                        i++
+                    }
+                }
+
+                if (res2 !== '') {
+                    randoms[randoms.length] = res2
+                }
+
+            }
+
+            return randoms
+
+        }
+
+        console.log(threeRandom(3, 1));
+        console.log(threeRandom(1, 9));
+
+        function random(x, y) {
+            let max
+            let min
+            if (x > y) {
+                max = x
+                min = y
+            } else {
+                max = y
+                min = x
+            }
+            return +parseFloat(Math.random() * (max - min + 1) + min).toFixed(2)
+        }
+
+
+
+
+
+    </script>
+</body>
+
+</html>

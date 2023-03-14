@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 5. 封装一个函数，传入一个13位数（时间戳）作为参数，输出 xxxx年xx月xx日xx小时xx分xx秒
+        function timeCount(n) {
+            let date = new Date(n)
+            return date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate() + '日' + date.getHours() + '时' + date.getMinutes() + '分' + date.getSeconds() + '秒'
+        }
+
+        console.log(timeCount(1678798944984));
+    </script>
+</body>
+
+</html>

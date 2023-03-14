@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 3.封装一个函数，输出10-100之间的六个随机数
+
+
+        /**
+         * num1 num2 第一个参数和第二个参数输入 是随机数范围
+         * num3 第三个参数输入随机数的数量
+        */
+        function sixRandom(num1, num2, num3) {
+            let randoms = []
+            randoms[0] = random(num1, num2)
+
+            for (let i = 1; i < num3;) {
+                let res1 = random(num1, num2)
+                let res2 = ''
+
+                for (let j = 0; j <= randoms.length; j++) {
+                    if (res1 === randoms[j]) {
+                        break
+                    } else if (randoms[j] === undefined) {
+                        res2 = res1
+                        i++
+                    }
+                }
+                if (res2 !== '') {
+                    randoms[randoms.length] = res2
+                }
+            }
+
+            return randoms
+        }
+
+        function random(x, y) {
+            let max
+            let min
+            if (x > y) {
+                max = x
+                min = y
+            } else {
+                max = y
+                min = x
+            }
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
+
+        console.log(sixRandom(10, 100, 6));
+    </script>
+
+</body>
+
+</html>

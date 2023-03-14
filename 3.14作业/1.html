@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 1.通过Date对象获取当前日期时间对象, 自己封装一个函数function formatDateTime(dateObj, tag){}
+        // 比如: formatDateTime(new Date(), "/") -> "1990/10/10 13:15:10";
+        // 比如: formatDateTime(new Date(), "年月日") -> "1990年10月10日 13时15分10秒";
+        // 比如: formatDateTime(new Date(), "-") -> "1990-10-10 13:15:10";
+        function formatDateTime(dateObj, tag) {
+            if (tag === '/') {
+                return dateObj.getFullYear() + '/' + (dateObj.getMonth() + 1) + '/' + dateObj.getDate() + ' ' + dateObj.getHours() + ':' + dateObj.getMinutes() + ':' + dateObj.getSeconds()
+            } else if (tag === '年月日') {
+                return dateObj.getFullYear() + '年' + (dateObj.getMonth() + 1) + '月' + dateObj.getDate() + '日' + ' ' + dateObj.getHours() + '时' + dateObj.getMinutes() + '分' + dateObj.getSeconds() + '秒'
+            } else if (tag === '-') {
+                return dateObj.getFullYear() + '-' + (dateObj.getMonth() + 1) + '-' + dateObj.getDate() + ' ' + dateObj.getHours() + ':' + dateObj.getMinutes() + ':' + dateObj.getSeconds()
+            }
+            return '输入参数错误'
+        }
+
+
+        console.log(formatDateTime(new Date(), '年月日'));
+    </script>
+
+</body>
+
+</html>
