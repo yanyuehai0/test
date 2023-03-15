@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. 封装一个函数，传入一个任意类型数据和一个数组，判断数组是否包含这个数据，例如[1, 2, 3, 4, 5, 6]包含2 不包含 7
+        // 1.1  如果包含返回true 不包含返回false
+        // 1.2  返回第一个和数据相等的元素的索引 
+        function estimate(n, arr) {
+            for (let i = 0; i < arr.length; i++) {
+                if (n === arr[i]) {
+                    return {
+                        isB0ool: true,
+                        index: i
+                    }
+                }
+            }
+            return false
+        }
+
+        console.log(estimate(1, [2, 3, 6, 8, 8, 9, 1, 8, 6, 3, 7]));
+    </script>
+</body>
+
+</html>

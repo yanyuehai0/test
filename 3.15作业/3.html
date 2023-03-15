@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 3. 封装函数，传入一个对象类型的参数，返回一个数组，数组中的偶数项由对象的属性名组成，数组中的奇数项有对象的属性值组成
+        // 例如
+        // { a：1，b: 2，c：3 } => [a, 1, b, 2, c, 3]
+        function joints(obj) {
+            let res = []
+            for (const k in obj) {
+                res[res.length] = k
+                res[res.length] = obj[k]
+            }
+            return res
+        }
+
+        console.log(joints({ a: 1, b: 2, c: 3 }));
+    </script>
+</body>
+
+</html>
