@@ -26,9 +26,7 @@
                 j = arrStr.length
                 for (let i = 0; i < arrStr.length; i++) {
                     j--
-                    if (arrStr[j] === 0) {
-                        break
-                    } else if (arrStr[i] !== arrStr[j]) {
+                    if (arrStr[i] !== arrStr[j]) {
                         break
                     } else if (i === arrStr.length - 1) {
                         arr.push(min)
