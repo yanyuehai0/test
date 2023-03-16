@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 3.  用户连续输入数据，把他们都添加到一个数组中，当输入"结束"时，就不再输入
+        // 显示这个数组
+
+        // 把这个数组作为屏蔽词语数组。
+
+        // 再次输入一句话。把刚才屏蔽词语数组中元素作为屏蔽关键词， 屏蔽这句话中的所有关键字
+
+        // 例如：["大傻蛋", "脑残"]
+
+        // '真是一个大傻蛋，而且还脑残'=> '真是一个***，而且**'
+
+        let str = prompt('请输入数据')
+        let list = []
+        while (str !== '结束') {
+            list.push(str)
+            str = prompt('请输入数据')
+        }
+
+        let str1 = prompt('请输入需要屏蔽的话')
+        for (let i = 0; i < list.length; i++) {
+            str1 = str1.replaceAll(list[i], '**')
+        }
+
+        console.log(str1);
+    </script>
+</body>
+
+</html>

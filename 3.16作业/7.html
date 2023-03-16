@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 7. 回文数字： 1991， 2112， 12321，等都是回文数字
+
+        // 求0 - 99999 之间的最大回文数字
+
+        function palindromicNumber(min, max) {
+
+            let arr = []
+            let arrStr
+            let j
+            let max1
+            for (min; min <= max; min++) {
+
+                arrStr = String(min).split('')
+                j = arrStr.length
+                for (let i = 0; i < arrStr.length; i++) {
+                    j--
+                    if (arrStr[j] === 0) {
+                        break
+                    } else if (arrStr[i] !== arrStr[j]) {
+                        break
+                    } else if (i === arrStr.length - 1) {
+                        arr.push(min)
+                        max1 = min
+                    }
+                }
+
+
+            }
+            return { arr: arr, max: max1 }
+        }
+
+        console.log(palindromicNumber(0, 99999));
+    </script>
+</body>
+
+</html>

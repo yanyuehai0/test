@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 6. 最大回文数
+        // 回文：例如 ‘abba’   从右边往左边也是 ‘abba’ ，   或者‘你好你’也是回文。 即从左往右和从右往左相等
+
+        // 用户输入一个字符串，判断是不是回文
+
+        let str = prompt('')
+
+        console.log(palindromicNumber(str));
+
+        function palindromicNumber(arr) {
+            let arrStr = str.split('')
+            let j = arrStr.length
+            let isBool
+            for (let i = 0; i < arrStr.length; i++) {
+                j--
+                if (arrStr[i] !== arrStr[j]) {
+                    return isBool = false
+                }
+            }
+            return isBool = true
+        }
+
+
+
+    </script>
+</body>
+
+</html>

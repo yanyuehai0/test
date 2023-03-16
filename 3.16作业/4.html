@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 4.  arr1 = ["a", "b", "c", "d", "e"]
+
+        // arr2 = ["b", "f", "c", "m", "e", "n"]
+
+        // 求在数组1中包含，数组2不包含的元素 
+
+        function differArr(arr1, arr2) {
+            let res = []
+
+            for (let i = 0; i < arr1.length; i++) {
+                if (arr2.indexOf(arr1[i]) === -1) {
+                    res.push(arr1[i])
+                }
+            }
+
+            for (let i = 0; i < arr2.length; i++) {
+                if (arr1.indexOf(arr2[i]) === -1) {
+                    res.push(arr2[i])
+                }
+            }
+
+            return res
+        }
+
+
+
+        let arr1 = ["a", "b", "c", "d", "e"]
+        let arr2 = ["b", "f", "c", "m", "e", "n"]
+
+        console.log(differArr(arr2, arr1));
+    </script>
+</body>
+
+</html>

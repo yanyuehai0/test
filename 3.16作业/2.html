@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+    //     2. arr = ["毛衣", "裤子", "上衣", "鞋子", "棉衣", "睡衣", "帽子", "衣服", "厚衣服"]
+    //    除去所有带"衣"字的元素
+
+
+        function offString(arr){
+            let res = []
+            for(let i = 0; i < arr.length; i++){
+                if(!arr[i].includes('衣')){
+                    res.push(arr[i])
+                }
+            }
+            return res
+        }
+
+
+    let arr = ["毛衣", "裤子", "上衣", "鞋子", "棉衣", "睡衣", "帽子", "衣服", "厚衣服"]
+    console.log(offString(arr));
+    </script>
+</body>
+
+</html>
