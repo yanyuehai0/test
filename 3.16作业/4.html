@@ -24,13 +24,7 @@
                     res.push(arr1[i])
                 }
             }
-
-            for (let i = 0; i < arr2.length; i++) {
-                if (arr1.indexOf(arr2[i]) === -1) {
-                    res.push(arr2[i])
-                }
-            }
-
+            
             return res
         }
 
@@ -39,7 +33,7 @@
         let arr1 = ["a", "b", "c", "d", "e"]
         let arr2 = ["b", "f", "c", "m", "e", "n"]
 
-        console.log(differArr(arr2, arr1));
+        console.log(differArr(arr1, arr2));
     </script>
 </body>
 
