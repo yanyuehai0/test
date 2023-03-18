@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 9.输入密码，判断格式是否正确，密码长度6-10位，且必须包含数字
+        
+        function password(str){
+
+            let arr = str.split('')
+            
+            let inNumber = false
+
+            for(let i = 0; i < arr.length; i++){
+                arr[i] = Number(arr[i])
+                if(!isNaN(arr[i])){
+                    inNumber = true
+                }
+            }
+
+            if(str.length >= 6 && str.length <= 10 && inNumber === true){
+                return true
+            }
+            return false
+        }
+
+        let str =  prompt('请输入密码')
+        alert(password(str))
+    </script>
+</body>
+
+</html>

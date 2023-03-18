@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 6. 编写一个函数fn返回字符串中最长的连续重复字母    
+
+        // 例如  fn("mmmiijjjjkkkkkkssptr") 返回"kkkkkk
+
+        function fn(str) {
+            let arr = str.split('')
+            let max = ''
+            let newarr = []
+            let j = 0
+
+            // 把连续重复的字母添加到新数组里  newarr
+            for (let i = 0; i < arr.length; i++) {
+
+                if (newarr.indexOf(arr[i]) !== i && arr[i] === arr[i - 1]) {
+                    newarr[j - 1].push(arr[i])
+
+                } else {
+                    newarr[j] = []
+                    newarr[j].push(arr[i])
+                    j++
+                }
+
+            }
+
+            // 判断最长的数组添加到 max
+            for(let i = 0; i < newarr.length; i++){
+                if(max.length < newarr[i].length){
+                    max = newarr[i]
+                }
+            }
+
+           return max.join('')
+        }
+
+        let str = "mmmiijjjjkkkkkkssptrkkk"
+        console.log(fn(str));
+
+    </script>
+</body>
+
+</html>

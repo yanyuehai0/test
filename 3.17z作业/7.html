@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 8.输入邮箱地址，验证邮箱格式是否正确，邮箱格式，必须包含 @符合，必须包含.符号，   
+        // .符号必须在 @符合后面，而且中间至少再隔一位，@符合不能是第一位，.符号不能是最后一位
+        function email(str) {
+            let x = str.indexOf('@')
+            let y = str.indexOf('.')
+            console.log(x);
+            console.log(y);
+
+            if (x !== -1 && y !== -1 && x !== 0 && y !== str.length - 1 && x+1 < y) {
+                return true
+            }
+
+            return false
+        }
+
+        let str = prompt('请输入邮箱地址')
+        alert(email(str))
+    </script>
+</body>
+
+</html>

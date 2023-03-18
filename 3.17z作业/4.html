@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 5. 声明一个函数，实现如下效果 将字符串"i come from beijing"倒置，即控制台输出"beijing from come i"
+
+        //   function invert(str){
+        //     str = str.split(' ')
+        //     let res = ''
+        //     for(let i = str.length - 1; i >= 0; i--){
+        //         res += str[i] + ' '
+        //     }
+        //     return res
+        //   }
+
+
+
+        function invert(str){
+            str = str.split(' ')
+            str = str.reverse()
+            return str.join(' ')
+        }
+
+
+          let str ='i come from beijing'
+
+          console.log(invert(str));
+    </script>
+</body>
+
+</html>

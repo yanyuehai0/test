@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 7.  求出121 - 130 之间不重复的六个随机数放入数组
+
+        function random(min, max){
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
+
+        function arrNumder(n, min , max){
+            let arr = []
+            for(let i = 0; i < n; i++){
+                let dom = random(min, max)
+                if(!arr.includes(dom)){
+                    arr.push(dom)
+                }else{
+                    i--
+                }
+            }
+            return arr
+        }
+
+        console.log(arrNumder(6, 121, 130));
+    </script>
+</body>
+
+</html>
