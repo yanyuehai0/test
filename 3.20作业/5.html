@@ -21,6 +21,12 @@
                 imgUrl: val.imageUrl
             })
         })
+        console.log(newArr); 
+
+        newArr = goodList.map(function(val, i){
+            return val.imageUrl
+        })
+
         console.log(newArr);
 
         newArr = goodList.reduce(function(pre, cur, curIndex){
