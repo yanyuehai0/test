@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./list.js"></script>
+
+    <script>
+        // 2.展示价格在400 - 800之间的商品
+
+        let newArr = goodList.filter(function (val, i) {
+            if (val.priceStr > 400 && val.priceStr < 800) {
+                return val
+            }
+        })
+
+        console.log(newArr);
+
+
+        newArr = goodList.reduce(function (pre, cur, curIndex) {
+            if (cur.priceStr > 400 && cur.priceStr < 800) {
+                pre.push(cur)
+            }
+            return pre
+        }, [])
+
+        console.log(newArr);
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./list.js"></script>
+
+    <script>
+        // 1.输出最贵的商品的价格 （价格属性为priceStr）
+        let maxPrice = Number(goodList[0].priceStr)
+        goodList.forEach(function (val, i) {
+            let price = Number(val.priceStr)
+            if (maxPrice < price) {
+                maxPrice = price
+            }
+        });
+        console.log(maxPrice);
+
+
+        maxPrice = goodList.reduce(function (pre, cur, ucrIndex) {
+            return pre < Number(cur.priceStr) ? pre = Number(cur.priceStr) : pre
+        }, Number(goodList[0].priceStr))
+
+        console.log(maxPrice);
+    </script>
+</body>
+
+</html>

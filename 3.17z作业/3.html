@@ -10,21 +10,26 @@
 
 <body>
     <script>
-    //     3. 声明一个函数，传入一个数字作为参数, 实现如下效果
-     
-    //  例如  将数字12345678转化成RMB形式：12, 345, 678
+        //     3. 声明一个函数，传入一个数字作为参数, 实现如下效果
 
-    let str = 12345678
-    str = String(str).split('')
-    let res = ''
-    for(let i = 0; i < str.length; i++){
-        if(i % 3 === 2 && i !== str.length -1){
-            res += ','
+        //  例如  将数字12345678转化成RMB形式：12, 345, 678
+
+        let str = 1234567891
+        function getStr(str) {
+            str = String(str).split('').reverse()
+
+            let res = ''
+            for (let i = 0; i < str.length; i++) {
+                res += str[i]
+                if ((i + 1) % 3 === 0 && i !== str.length - 1) {
+                    res += ','
+                }
+
+            }
+            return res.split('').reverse().join('')
         }
-        res += str[i]
-    }
 
-    console.log(res);
+        console.log(getStr(str));
     </script>
 </body>
 

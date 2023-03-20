@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./list.js"></script>
+
+    <script>
+        // 4.  求出title的属性值，字符最长的元素
+        maxTitle = goodList[0].title
+        goodList.forEach(function (val, i) {
+            if(maxTitle.length < val.title.length){
+                maxTitle = val.title
+                
+            }
+        })
+
+        console.log(maxTitle);
+
+        
+        maxTitle = goodList.reduce(function(pre, cur, curIndex){
+            return pre.length < cur.title.length ? cur.title : pre
+        }, goodList[0].title)
+
+        console.log(maxTitle);
+    </script>
+</body>
+
+</html>

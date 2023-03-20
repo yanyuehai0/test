@@ -30,7 +30,7 @@
 
         let str1 = prompt('请输入需要屏蔽的话')
         for (let i = 0; i < list.length; i++) {
-            str1 = str1.replaceAll(list[i], '**')
+            str1 = str1.replaceAll(list[i], '*'.repeat(list[i].length))
         }
 
         console.log(str1);
