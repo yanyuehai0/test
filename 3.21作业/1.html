@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .wrappper {
+            width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #list {
+            width: 240px;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        #list #img {
+            width: 100%;
+            margin-bottom: 10px;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="wrappper">
+        <div id="list"></div>
+        <div id="list"></div>
+        <div id="list"></div>
+        <div id="list"></div>
+        <div id="list"></div>
+    </div>
+
+
+
+
+    <script src="./list1.js"></script>
+    <script src="./list2.js"></script>
+    <script>
+        // 处理数据
+        let data = list.pins.concat(list2)
+        data = data.map((v, i) => {
+            return {
+                pin_id: v.pin_id,
+                imgUrl: v.orig_source,
+                constHeight: 240 * v.file.height / v.file.width
+            }
+        })
+
+
+        let arr = []
+        for (let i = 0; i < 5; i++) {
+            arr.push({
+                height: 0,
+                list: []
+            })
+        }
+
+
+        let min = arr[0]
+
+        data.forEach((v, i) => {
+
+            arr.forEach((val, ind) => {
+                if (min.height > val.height) {
+                    min = val
+                }
+            })
+
+            min.height += v.constHeight
+            min.list.push({
+                pin_id: v.pin_id,
+                imgUrl: v.imgUrl
+            })
+        })
+
+        console.log(arr);
+
+
+        // 渲染图片
+        let lists = document.querySelectorAll('#list')
+
+        lists.forEach((v, i) => {
+            arr[i].list.forEach((val, ind) => {
+                let imgBox = document.createElement('div')
+                imgBox.id = 'img'
+                imgBox.innerHTML = `
+                <img src=${val.imgUrl} alt="">
+                `
+                v.appendChild(imgBox)
+            })
+        })
+    </script>
+</body>
+
+</html>

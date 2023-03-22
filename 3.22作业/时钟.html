@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+    }
+
+    body {
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    div {
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        border: 2px solid #000;
+        position: relative;
+        background-image: url(https://gd-hbimg.huaban.com/a874463d1e5231a885d05caa170b8a8bbf9142d2e98d3-bILE6Y_fw240webp);
+        background-size: contain;
+        background-position: center;
+    }
+
+    span {
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        transform: translate(50%, 0);
+
+        border-top: 20px solid #fff;
+        width: 2px;
+        height: 486px;
+        
+        background-color: transparent;
+    }
+
+    p:nth-child(1) {
+        position: absolute;
+        top: 35px;
+        left: 50%;
+
+        transform: translate(50%, 0);
+
+        width: 4px;
+        height: 210px;
+        background-color: red;
+        transform-origin: bottom;
+
+    }
+
+    p:nth-child(1)::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(-35%, -80%);
+
+        content: '';
+        border: 7px solid transparent;
+        border-bottom-color: red;
+    }
+
+
+    p:nth-child(2) {
+        position: absolute;
+        top: 55px;
+        left: 50%;
+
+        transform: translate(50%, 0);
+
+        width: 5px;
+        height: 190px;
+        background-color: #fff;
+        /* position: relative; */
+        z-index: 2;
+        transform-origin: bottom;
+
+    }
+
+    p:nth-child(2)::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(-35%, -80%);
+
+        content: '';
+        border: 7px solid transparent;
+        border-bottom-color: #fff;
+    }
+
+
+    p:nth-child(3) {
+        position: absolute;
+        top: 105px;
+        left: 50%;
+
+        transform: translate(50%, 0);
+
+        width: 7px;
+        height: 140px;
+        background-color: #fff;
+        /* position: relative; */
+        z-index: 1;
+        transform-origin: bottom;
+
+    }
+
+    p:nth-child(3)::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(-35%, -80%);
+
+        content: '';
+        border: 9px solid transparent;
+        border-bottom-color: #fff;
+    }
+</style>
+
+<body>
+
+    <div>
+
+        <p></p>
+        <p></p>
+        <p></p>
+
+    </div>
+
+    <script>
+        const div = document.getElementsByTagName('div')[0]
+        for (let i = 0; i < 60; i++) {
+            let span = document.createElement('span')
+            span.style.transform = `translate(50%, 0) rotate(${i * 6}deg)`
+            if (i % 5 === 0) {
+                span.style.width = '4px'
+                span.style.borderTopWidth = '25px'
+            }
+            div.appendChild(span)
+        }
+
+        const ps = Array.from(document.getElementsByTagName('p'))
+        console.log(ps);
+        timeDate()
+        setInterval(timeDate, 1000)
+
+        function timeDate() {
+            let date = new Date()
+            ps[0].style.transform = `rotate(${date.getSeconds() * 6}deg)`
+            ps[1].style.transform = `rotate(${date.getMinutes() * 6 + date.getSeconds() * (360 / 60 / 60)}deg)`
+            ps[2].style.transform = `rotate(${date.getHours()*30 + date.getMinutes()*60 * (360/60/60/12)}deg)`
+        }
+
+
+    </script>
+
+</body>
+
+</html>
