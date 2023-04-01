@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .box {
+            width: 500px;
+            height: 6px;
+            margin: 100px auto;
+            background-color: #e4e7ed;
+            position: relative;
+            display: flex;
+            align-items: center;
+            box-sizing: content-box;
+            border-top: 100px solid #fff;
+            border-bottom: 100px solid #fff;
+        }
+
+        .main {
+            width: 0px;
+            height: 6px;
+            background-color: #409eff;
+        }
+
+        .yuan {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 5px solid #409eff;
+            background-color: #fff;
+            transition: all .1s;
+        }
+
+
+        .text {
+            position: absolute;
+            left: 0;
+            top: -50px;
+            width: 35px;
+            height: 35px;
+            text-align: center;
+            line-height: 35px;
+            border-radius: 5px;
+            background-color: #f4f4f4;
+            color: #409eff;
+            display: none;
+        }
+    </style>
+</head>
+
+<div class="box">
+    <div class="text">0</div>
+    <div class="main"></div>
+    <div class="yuan"></div>
+</div>
+
+<body>
+    <script>
+        const box = document.getElementsByClassName('box')[0]
+        const main = document.getElementsByClassName('main')[0]
+        const yuan = document.getElementsByClassName('yuan')[0]
+        const text = document.getElementsByClassName('text')[0]
+        let isBool = false
+        yuan.onmousedown = () => {
+            isBool = true
+            
+        }  
+
+        box.onmousemove = (e) => {
+            if (isBool) {
+                text.style.display = 'block'
+                text.innerHTML = parseInt(e.layerX / 4.96)
+                text.style.left = e.layerX - 8 + 'px'
+                if (parseInt(e.layerX / 4.96) === 100) text.style.left = e.layerX - 30 + 'px'
+                main.style.width = e.layerX + 'px'
+                yuan.style.left = e.layerX + 'px'
+                yuan.style.border = '2px solid #409eff'
+            }
+        }
+        document.onmouseup = () => {
+            isBool = false
+            yuan.style.border = '5px solid #409eff'
+            setTimeout(() => {
+                text.style.display = 'none'
+            }, 3000)
+        }
+
+        box.onclick = (e) => {
+            text.style.display = 'block'
+            text.innerHTML = parseInt(e.layerX / 4.96)
+            text.style.left = e.layerX - 8 + 'px'
+            if (parseInt(e.layerX / 4.96) === 100) text.style.left = e.layerX - 30 + 'px'
+            main.style.width = e.layerX + 'px'
+            yuan.style.left = e.layerX + 'px'
+
+            setTimeout(() => {
+                text.style.display = 'none'
+            }, 3000)
+        }
+
+        yuan.onmouseover = () => {
+            text.style.display = 'block'
+            yuan.style.border = '2px solid #409eff'
+        }
+
+        yuan.onmouseout = () => {
+            yuan.style.border = '5px solid #409eff'
+            setTimeout(() => {
+                text.style.display = 'none'
+            }, 3000)
+        }
+    </script>
+</body>
+
+</html>

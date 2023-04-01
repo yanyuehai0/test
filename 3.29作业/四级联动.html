@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    select {
+        padding: 3px 5px;
+        margin-right: 10px;
+    }
+</style>
+
+<body>
+
+    <select name="province" id="province">
+        <option hidden>请选择</option>
+    </select>
+    <select name="city" id="city">
+        <option hidden>请选择</option>
+    </select>
+    <select name="sanjak" id="sanjak">
+        <option hidden>请选择</option>
+    </select>
+    <select name="village" id="village">
+        <option hidden>请选择</option>
+    </select>
+
+    <script src="./area.js"></script>
+    <script>
+        console.log(area);
+        // 省
+        const province = document.getElementById('province')
+        // 市
+        const city = document.getElementById('city')
+        // 县
+        const sanjak = document.getElementById('sanjak')
+        // 乡镇
+        const village = document.getElementById('village')
+
+        function areaValue(arr, ele){
+            for (const k in arr) {
+            let opt = document.createElement('option')
+            opt.innerHTML = k
+            ele.append(opt)
+        }
+        }
+        // 省
+        areaValue(area, province)
+
+        // 市
+        let cityData
+        province.onchange = () => {
+            city.innerHTML = ''
+            cityData = area[province.value][0]
+            areaValue(cityData, city)
+
+            city.onchange()
+        }
+
+        // 县
+        let sanjakData
+        city.onchange = () => {
+            sanjak.innerHTML = ''
+            sanjakData = cityData[city.value]
+            sanjakData.forEach((v, i) => {
+                let opt = document.createElement('option')
+                opt.setAttribute('key', i)
+                for (const k in v) {
+                    opt.innerHTML = k
+                    sanjak.append(opt)
+                }
+            })
+
+            sanjak.onchange()
+        }
+
+        // 乡镇
+        let villageData
+        sanjak.onchange = () => {
+            village.innerHTML = ''
+            Array.from(sanjak.children).forEach((v, i) => {
+                if (v.innerHTML === sanjak.value) {
+                    villageData = sanjakData[v.getAttribute('key')][v.innerHTML].replaceAll(' ', '').split('、')
+                }
+            })
+
+            villageData.forEach((v, i) => {
+                let opt = document.createElement('option')
+                opt.innerHTML = v
+                village.append(opt)
+            })
+
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>0</p>
+    <button>加一</button>
+    <script>
+        // 7. 页面上一个数字，每次点击按钮，数字加一
+        const p = document.getElementsByTagName('p')[0]
+        const btn = document.getElementsByTagName('button')[0]
+
+        btn.onclick = () => {
+            p.innerHTML = +p.innerHTML + 1
+        }
+
+    </script>
+
+</body>
+
+</html>

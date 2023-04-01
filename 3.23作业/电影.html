@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    ul {
+        width: 750px;
+        list-style: none;
+    }
+
+    li {
+        width: 100%;
+        height: 170px;
+        display: flex;
+        margin-bottom: 20px;
+    }
+
+    .left {
+        width: 90px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .left .score {
+        width: 55px;
+        height: 55px;
+        background-color: #679c21;
+        text-align: center;
+        color: #fff;
+        padding: 2px;
+    }
+
+    .score p {
+        font-size: 12px;
+    }
+
+    .score h2 {
+        font-size: 24px;
+    }
+
+    .right h1 {
+        font-weight: 400;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .main img {
+        width: 96px;
+    }
+
+    .main {
+        display: flex;
+    }
+
+    .main .text p {
+        font-size: 13px;
+        line-height: 25px;
+        margin-left: 10px;
+    }
+
+    .main .text a {
+        width: 124px;
+        height: 28px;
+        background-color: #679c21;
+        color: #fff;
+        display: inline-block;
+        text-align: center;
+        line-height: 28px;
+        border-radius: 28px;
+        font-size: 14px;
+        text-decoration: none;
+        margin-left: 10px;
+    }
+
+    button {
+        width: 125px;
+        height: 30px;
+        border-radius: 30px;
+        background-color: #679c21;
+        color: #fff;
+        border: none;
+        margin-bottom: 20px;
+        margin-right: 10px;
+    }
+
+    button:hover {
+        background-color: #4f6b2b;
+    }
+
+    .box{
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #fff;
+    }
+
+    body{
+        padding-top: 50px;
+    }
+</style>
+
+<body>
+    <div class="box">
+        <button>添加</button>
+        <button>删除</button>
+    </div>
+    <ul>
+
+    </ul>
+
+    <script src="./data.js"></script>
+    <script>
+        const btn1 = document.getElementsByTagName('button')[0]
+        const btn2 = document.getElementsByTagName('button')[1]
+        const ul = document.getElementsByTagName('ul')[0]
+
+        const lis = document.getElementsByTagName('li')
+
+
+        let i = 0
+        function add() {
+            if (i === movies.length) {
+                i = 0
+            }
+            let li = document.createElement('li')
+            li.innerHTML = `
+            <div class="left">
+                <div class="score">
+                    <p>总评分</p>
+                    <h2>${movies[i].rating}</h2>
+                </div>
+            </div>
+            <div class="right">
+                <h1>${movies[i].name}</h1>
+                <div class="main">
+                    <img src=${movies[i].img} alt="">
+                    <div class="text">
+                        <p>
+                            148分钟 - 类型： ${movies[i].movieType}</p>
+                            <p>
+                                导演： ${movies[i].directors[0]}
+                                <p>主演： ${movies[i].actors[0]} ${movies[i].actors[1]}</p>
+                                <a href="#">在线播放</a>
+                            </p>
+                    </div>
+                </div>
+            </div>
+            `
+            ul.appendChild(li)
+            i++
+        }
+
+
+        function ramove() {
+            ul.removeChild(lis[lis.length - 1])
+        }
+
+        btn1.onclick = add
+
+        btn2.onclick = ramove
+    </script>
+</body>
+
+</html>

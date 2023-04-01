@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    p {
+        width: 500px;
+        height: 100px;
+        border: 1px solid;
+        line-height: 25px;
+        padding: 10px;
+    }
+</style>
+
+<body>
+    <p></p>
+    <button>打字</button>
+
+    <script>
+        // 4.   给你一个字符串， 实现像打字效果似的，每个300毫秒页面上出现下一个字符
+        // 例如：    a => ab => abc => abcd => abcde
+
+        const btn = document.getElementsByTagName('button')[0]
+        const p = document.getElementsByTagName('p')[0]
+        str = '给你一个字符串， 实现像打字效果似的，每个300毫秒页面上出现下一个字符'
+
+        function addstr(str, i) {
+            let time = setInterval((str) => {
+                p.innerText += str[i]
+                if(i < str.length - 1){
+                    i++
+                }else{
+                    clearInterval(time)
+                }
+            }, 300, str)
+        }
+
+        btn.onclick = () =>{
+            p.innerText = ''
+            let i = 0
+            addstr(str , i)
+        }
+
+
+    </script>
+</body>
+
+</html>

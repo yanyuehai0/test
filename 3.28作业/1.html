@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="https://at.alicdn.com/t/c/font_3792572_v8mlzpwxr39.css">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    ul {
+        list-style: none;
+        display: flex;
+        width: 230px;
+        margin: 100px auto;
+        user-select: none;
+    }
+
+    li {
+        width: 34px;
+        text-align: center;
+    }
+
+    .icon-017renlian-1 {
+        font-size: 28px;
+        color: rgb(198, 209, 222);
+        vertical-align: middle;
+        transition: all .2s;
+    }
+
+    .icon-xiaolian1-mianxing,
+    .icon-xiaolian2-mianxing,
+    .icon-xiaolian3-mianxing {
+        font-size: 28px;
+        transition: all .2s;
+        vertical-align: middle;
+    }
+
+    .bg-orange {
+        color: rgb(255, 153, 0);
+    }
+
+    .bg-yellow {
+        color: rgb(247, 186, 42);
+    }
+
+    .bg-gray {
+        color: rgb(153, 169, 191);
+    }
+
+    .icon-xiaolian1-mianxing:hover,
+    .icon-xiaolian2-mianxing:hover,
+    .icon-xiaolian3-mianxing:hover {
+        font-size: 32px;
+    }
+
+    span {
+        line-height: 28px;
+        font-size: 14px;
+        margin-left: 5px;
+    }
+</style>
+
+<body>
+    <ul>
+        <li><i class="iconfont icon-017renlian-1"></i></li>
+        <li><i class="iconfont icon-017renlian-1"></i></li>
+        <li><i class="iconfont icon-017renlian-1"></i></li>
+        <li><i class="iconfont icon-017renlian-1"></i></li>
+        <li><i class="iconfont icon-017renlian-1"></i></li>
+        <span></span>
+    </ul>
+
+
+    <script>
+        const lis = Array.from(document.getElementsByTagName('li'))
+        const span = document.getElementsByTagName('span')[0]
+        let index = -1
+        lis.forEach((v, i) => {
+            v.onclick = () => {
+                grade(i)
+                index = i
+            }
+
+            v.onmouseenter = () => {
+                grade(i)
+            }
+
+            v.onmouseleave = () => {
+                grade(index)
+            }
+        })
+
+        function grade(i) {
+            for (let j = 0; j <= i; j++) {
+                lis[j].children[0].className = 'iconfont'
+                if (i > 2) {
+                    lis[j].children[0].classList.add('icon-xiaolian1-mianxing', 'bg-orange')
+                } else if (i > 1) {
+                    lis[j].children[0].classList.add('icon-xiaolian3-mianxing', 'bg-yellow')
+                } else {
+                    lis[j].children[0].classList.add('icon-xiaolian2-mianxing', 'bg-gray')
+                }
+
+            }
+            for (let j = i + 1; j < lis.length; j++) {
+                lis[j].children[0].className = 'iconfont icon-017renlian-1'
+            }
+
+            switch (i) {
+                case 4:
+                    span.innerHTML = '惊喜'
+                    span.style.color = 'rgb(255, 153, 0)'
+                    break;
+                case 3:
+                    span.innerHTML = '满意'
+                    span.style.color = 'rgb(255, 153, 0)'
+                    break;
+                case 2:
+                    span.innerHTML = '一般'
+                    span.style.color = 'rgb(247, 186, 42)'
+                    break;
+                case 1:
+                    span.innerHTML = '失望'
+                    span.style.color = 'rgb(153, 169, 191)'
+                    break;
+                case 0:
+                    span.innerHTML = '极差'
+                    span.style.color = 'rgb(153, 169, 191)'
+                    break;
+                default:
+                span.innerHTML = ''
+                    break;
+            }
+        }
+
+    </script>
+</body>
+
+</html>

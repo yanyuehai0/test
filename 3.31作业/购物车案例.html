@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    ul {
+        list-style: none;
+        width: 1200px;
+        margin: 0 auto;
+    }
+
+    body{
+        padding-bottom: 80px;
+    }
+
+    .title {
+        width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #f5f5f5;
+        padding: 10px 40px;
+        text-align: center;
+    }
+
+    .total {
+        width: 50px;
+    }
+
+    .goods-img {
+        width: 100px;
+    }
+
+    .goods-title {
+        width: 180px;
+    }
+
+    .goods-store {
+        width: 150px;
+    }
+
+    .price {
+        width: 50px;
+    }
+
+    .count {
+        width: 100px;
+    }
+
+    .sum {
+        width: 50px;
+    }
+
+    .operate {
+
+        width: 100px;
+    }
+
+    .settle {
+        width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        background-color: #e5e5e5;
+        align-items: center;
+        margin-top: 20px;
+        position: fixed;
+        left: 50%;
+        bottom: 0;
+        transform: translate(-50%, 0%);
+    }
+
+
+    .left {
+        width: 200px;
+        display: flex;
+        justify-content: space-between;
+        padding-left: 60px;
+    }
+
+    .right {
+        width: 400px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .settle-main {
+        width: 250px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+    .settle-up {
+        width: 100px;
+        height: 60px;
+        background-color: #B0B0B0;
+        text-align: center;
+        line-height: 60px;
+        font-weight: 600;
+        font-size: 18px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .settle span {
+        color: orangered;
+        font-size: 18px;
+    }
+
+    .settle .delete {
+        color: cornflowerblue;
+        cursor: pointer;
+    }
+
+    .settle .goods-sum {
+        width: 150px;
+    }
+
+    li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px 40px;
+        text-align: center;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-top: 20px;
+    }
+
+    li span {
+        color: orangered;
+    }
+
+    li img {
+        width: 100px;
+        height: 100px;
+    }
+
+    li p {
+        font-size: 14px;
+    }
+
+    li .cun {
+        width: 90px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    li .cun input {
+        width: 30px;
+        height: 34px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        text-align: center;
+        float: left;
+    }
+
+    li .cun button {
+        width: 29px;
+        height: 34px;
+        border: none;
+        background-color: #fff;
+        float: left;
+    }
+
+    li .cun button:hover {
+        background-color: #adadad;
+    }
+
+    li .goods-delete {
+        width: 80px;
+        padding: 6px 5px;
+        background-color: #d9534f;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    li .goods-delete:hover {
+        background-color: #b44743;
+    }
+</style>
+
+<body>
+    <div class="title">
+        <div class="total"><input type="checkbox" name="" class="totall">全选</div>
+        <div class="goods-img">商品图片</div>
+        <div class="goods-title">商品信息</div>
+        <div class="goods-store">供应商</div>
+        <div class="price">单价</div>
+        <div class="count">数量</div>
+        <div class="sum">金额</div>
+        <div class="operate">操作</div>
+    </div>
+    <ul>
+
+    </ul>
+
+    <div class="settle">
+        <div class="left">
+            <div class="total"><input type="checkbox" name="" class="totall">全选</div>
+            <div class="delete">删除</div>
+        </div>
+        <div class="right">
+            <div class="goods-count">
+                已选商品 <span>0</span> 件
+            </div>
+            <div class="settle-main">
+                <div class="goods-sum">
+                    合计：<span>￥0.00</span>
+                </div>
+                <div class="settle-up">
+                    结算
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./data.js"></script>
+    <script>
+        let goodList = []
+        data.forEach((v, i) => {
+            v.goodList.forEach((val, ind) => {
+                if (ind < 2 ) {
+                    goodList.push(val)
+                }
+            })
+        })
+
+        const ul = document.getElementsByTagName('ul')[0]
+        // 渲染数据
+        goodList.forEach((val, ind) => {
+            let li = document.createElement('li')
+            li.innerHTML = `
+                <div class="total"><input type="checkbox" name="" class="goods-che"></div>
+                <div class="goods-img"><img src=${val.imgUrl} alt="">
+                </div>
+                <p class="goods-title">${val.title}</p>
+                <p class="goods-store">${val.store}</p>
+                <div class="price"><span>￥${val.price}</span></div>
+
+                <div class="cun count">
+                    <button class="subtract">-</button>
+                    <input type="text" value="1" class="cun-input">
+                    <button class="add">+</button>
+                </div>
+                <div class="sum"><span>￥${val.price}</span></div>
+                <div class="goods-delete operate">删除</div>
+                `
+            ul.append(li)
+        })
+
+
+        const total = Array.from(document.getElementsByClassName('totall'))
+        const lisChe = Array.from(document.getElementsByClassName('goods-che'))
+        // 商品
+        let lis = document.getElementsByTagName('li')
+        lis = Array.from(lis)
+        // 已选数量
+        const goodsCount = document.getElementsByClassName('goods-count')[0]
+        // 合计
+        const goodsSum = document.getElementsByClassName('goods-sum')[0]
+
+        // 结算
+        const settleUp = document.getElementsByClassName('settle-up')[0]
+
+        // 下删除
+        const delAll = document.getElementsByClassName('delete')[0]
+
+
+        // 点击上全选
+        total[0].onchange = () => {
+            lisChe.forEach((v, i) => {
+                v.checked = total[0].checked
+            })
+            total[1].checked = total[0].checked
+            sumNum()
+        }
+        // 点击下全选
+        total[1].onchange = () => {
+            lisChe.forEach((v, i) => {
+                v.checked = total[1].checked
+            })
+            total[0].checked = total[1].checked
+            sumNum()
+        }
+
+        // 商品选中
+        lisChe.forEach((v, i) => {
+            v.onchange = () => {
+                total[1].checked = total[0].checked = lisChe.every((val, ind) => {
+                    return val.checked
+                })
+                sumNum()
+            }
+        })
+
+        // 点击下删除
+        delAll.onclick = () =>{
+            lis.forEach((v, i) =>{
+                if(v.children[0].children[0].checked){
+                   v.remove() 
+                }
+            })
+            sumNum()
+        }
+
+        // 增加删除
+
+        lis.forEach((v, i) => {
+            // 减
+            let subtracts = v.children[5].children[0]
+            subtracts.onclick = () => {
+                if (v.children[5].children[1].value > 0) {
+                    v.children[5].children[1].value = v.children[5].children[1].value - 1
+                    v.children[6].children[0].innerHTML = '￥' + v.children[4].children[0].innerHTML.replace('￥', '') * v.children[5].children[1].value
+                }
+                sumNum()
+            }
+
+            // 加
+            let adds = v.children[5].children[2]
+            adds.onclick = () => {
+                v.children[5].children[1].value = +v.children[5].children[1].value + 1
+                v.children[6].children[0].innerHTML = '￥' + v.children[4].children[0].innerHTML.replace('￥', '') * v.children[5].children[1].value
+                sumNum()
+            }
+
+            let inp = v.children[5].children[1]
+            inp.oninput = () => {
+                inp.value = Math.abs(inp.value)
+                v.children[6].children[0].innerHTML = '￥' + v.children[4].children[0].innerHTML.replace('￥', '') * v.children[5].children[1].value
+                sumNum()
+            }
+
+            // 删除
+            let del = v.children[7]
+            del.onclick = () => {
+                v.remove()
+                sumNum()
+            }
+        })
+
+
+        // 计算数量总价函数
+
+        function sumNum() {
+            let lis = document.getElementsByTagName('li')
+            lis = Array.from(lis)
+            let countSum = 0
+            let moneySum = 0
+            lis.forEach((v, i) => {
+                if (v.children[0].children[0].checked) {
+                    countSum += +v.children[5].children[1].value
+                    moneySum += +v.children[6].children[0].innerHTML.replace('￥', '')
+                }
+            })
+            goodsCount.children[0].innerHTML = countSum
+            goodsSum.children[0].innerHTML = '￥' + moneySum + '.00'
+            if (countSum > 0) {
+                settleUp.style.backgroundColor = 'red'
+            }else{
+                settleUp.style.backgroundColor = '#B0B0B0'
+            }
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>老虎机</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 450px;
+        height: 450px;
+        position: relative;
+    }
+
+    li {
+        width: 150px;
+        height: 150px;
+        background-color: rgb(red, green, blue);
+        text-align: center;
+        line-height: 150px;
+        background-color: #f9f9f9;
+        border: 1px solid #fff;
+        transition: all .1s;
+    }
+
+    .switch {
+        background-color: #f5f5f5;
+        cursor: pointer;
+    }
+
+    .switch:hover {
+        background-color: #b9b2b282;
+    }
+
+    .block {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .block:nth-child(2) {
+        left: 150px;
+    }
+
+    .block:nth-child(3) {
+        left: 300px;
+    }
+
+    .block:nth-child(4) {
+        top: 150px;
+        left: 300px;
+    }
+
+    .block:nth-child(6) {
+        top: 300px;
+        left: 300px;
+    }
+
+    .block:nth-child(7) {
+        top: 300px;
+        left: 150px;
+    }
+
+    .block:nth-child(8) {
+        top: 300px;
+        left: 0px;
+    }
+
+    .block:nth-child(9) {
+        top: 150px;
+        left: 0px;
+    }
+</style>
+
+<body>
+    <ul>
+        <li class="block">柠檬</li>
+        <li class="block">大王</li>
+        <li class="block">西瓜</li>
+        <li class="block">苹果</li>
+
+        <li class="switch">开始</li>
+
+        <li class="block">橘子</li>
+        <li class="block">双星</li>
+        <li class="block">铃铛</li>
+        <li class="block">双七</li>
+    </ul>
+
+    <script>
+        function random(max, min = 0) {
+            return Math.floor(Math.random() * (max - min + 1)) + min
+        }
+
+        const lis = Array.from(document.getElementsByClassName('block'))
+
+        const switchs = document.getElementsByClassName('switch')[0]
+        let isBool = false
+        let timer1
+        let timer2 
+        let index = 0
+        lis[index].style.backgroundColor = `rgb(${random(255)}, ${random(255)}, ${random(255)})`
+        switchs.onclick = () => {
+            isBool = !isBool
+            let s = 3
+
+            if (switchs.innerHTML === '开始') {
+                switchs.innerHTML = '结束'
+            }
+
+            if (isBool) {
+                timer1 = setInterval(() => {
+                    if (index === lis.length) {
+                        index = 0
+                    }
+
+                    lis.forEach((v, i) => {
+                        v.style.backgroundColor = `#f5f5f5`
+                    })
+                    lis[index].style.backgroundColor = `rgb(${random(255)}, ${random(255)}, ${random(255)})`
+                    index++
+                }, 100)
+            } else {
+                switchs.innerHTML = `结束(${s}秒)`
+                if (!isBool) {
+                    timer2 = setInterval(() => {
+                        s--
+                        switchs.innerHTML = `结束(${s}秒)`
+                        if(s === 0){
+                            clearInterval(timer2)
+                        }
+                    }, 1000)
+                }
+                setTimeout(() => {
+                    switchs.innerHTML = '开始'
+                    clearInterval(timer1)
+                }, 3000)
+            }
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

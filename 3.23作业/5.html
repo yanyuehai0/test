@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>阿诗丹顿所大大多所多所所多所多所多</p>
+
+    <button>点击</button>
+
+    <script>
+        // 5. 页面有一串文字  例如  “阿诗丹顿所大大多所多所所多所多所多”。
+        // 点击按钮，每次随机删除页面上一个字符
+        const p = document.getElementsByTagName('p')[0]
+        const btn = document.getElementsByTagName('button')[0]
+
+        function random(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
+
+        btn.onclick = () => {
+            p.innerText = p.innerText.replace(p.innerText[random(0, p.innerText.length)], '')
+        }
+
+    </script>
+</body>
+
+</html>

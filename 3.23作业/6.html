@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p></p>
+    <script>
+        // 6.  在页面上显示当前时间
+        const p = document.getElementsByTagName('p')[0]     
+
+        function time(){
+            let date = new Date()
+            p.innerText = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}  ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+        }
+
+        time()
+
+        setInterval(time, 1000)
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图</title>
+</head>
+<link rel="stylesheet" href="https://at.alicdn.com/t/c/font_3792572_v8mlzpwxr39.css">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+    }
+
+    .carousel {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+    }
+
+    ul,
+    ol {
+        list-style: none;
+    }
+
+    ul {
+        display: flex;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: all .3s;
+    }
+
+    ul li {
+        width: 100vw;
+        height: 100vh;
+        float: left;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+
+        transition: all .3s;
+    }
+
+    ol {
+        position: absolute;
+        left: 50%;
+        bottom: 10px;
+        transform: translateX(-50%);
+        display: flex;
+    }
+
+    ol li {
+        width: 10px;
+        height: 10px;
+        background-color: #fff;
+        margin-right: 5px;
+        cursor: pointer;
+        transition: all .3s;
+    }
+
+    .bg-red {
+        width: 30px;
+        background-color: #0052D9;
+    }
+
+    .left,
+    .right {
+        position: absolute;
+        z-index: 2;
+        transform: translateY(-50%);
+        text-align: center;
+        color: #0052D9;
+        cursor: pointer;
+        transition: all .3s;
+    }
+
+    .left {
+        top: 50%;
+        left: -80px;
+    }
+
+    .right {
+        top: 50%;
+        right: -80px;
+
+    }
+
+    .iconfont {
+        font-size: 80px;
+    }
+
+    .left-conent {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 200px;
+        height: 100vh;
+    }
+
+    .left-conent:hover .left {
+        left: 10px;
+    }
+
+    .right-conent {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 200px;
+        height: 100vh;
+    }
+
+    .right-conent:hover .right {
+        right: 10px;
+    }
+</style>
+
+<body>
+
+    <div class="carousel">
+        <ul style="left: 0;">
+        </ul>
+        <ol>
+        </ol>
+
+        <div class="left-conent"><i class="left iconfont icon-arrow-left"></i></div>
+        <div class="right-conent"><i class="right iconfont icon-arrow-right"></i></div>
+    </div>
+
+    <script>
+        let picdata = ['https://plc.jj20.com/up/allimg/1115/030422120641/220304120641-1.jpg',
+            'https://plc.jj20.com/up/allimg/1115/030422120641/220304120641-7.jpg',
+            'https://plc.jj20.com/up/allimg/1115/030422120641/220304120641-9.jpg',
+            'https://plc.jj20.com/up/allimg/1115/030422120641/220304120641-12.jpg',
+            'https://plc.jj20.com/up/allimg/1115/030422120641/220304120641-18.jpg',
+            'https://plc.jj20.com/up/allimg/1115/030422120641/220304120641-26.jpg'
+        ]
+        let data = [['https://img2.baidu.com/it/u=1355588818,75317825&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800',
+            'https://img2.baidu.com/it/u=2976443490,3254227688&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500',
+            'https://img2.baidu.com/it/u=2594690662,3289128349&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500',
+            'https://img2.baidu.com/it/u=2184205144,1708732405&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800',
+            'https://img2.baidu.com/it/u=2843752095,1330810593&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500',
+            'https://img2.baidu.com/it/u=425328423,1374778&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500'],
+        ['https://img1.baidu.com/it/u=3913151227,4083423677&fm=253&fmt=auto&app=120&f=JPEG?w=1200&h=750',
+            'https://img1.baidu.com/it/u=3085161235,4224711352&fm=253&fmt=auto&app=138&f=JPEG?w=741&h=500',
+            'https://img0.baidu.com/it/u=1323575644,1970106555&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500',
+            'https://img2.baidu.com/it/u=2308553366,2848634260&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500',
+            'https://img1.baidu.com/it/u=3725069758,1792027627&fm=253&fmt=auto&app=138&f=JPEG?w=940&h=500',
+            'https://img0.baidu.com/it/u=3965488072,975298485&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500'
+        ]
+        ]
+
+
+        let num = Math.floor(Math.random() * (data.length))
+
+        const ol = document.getElementsByTagName('ol')[0]
+        const ul = document.getElementsByTagName('ul')[0]
+        // 渲染数据
+        data[num].forEach((v, i) => {
+            let li = document.createElement('li')
+            li.style.backgroundImage = `url(${v})`
+            ul.append(li)
+            let oli = document.createElement('li')
+            if (i === 0) {
+                oli.classList.add('bg-red')
+            }
+            ol.append(oli)
+
+        })
+        // 无缝轮播
+        let li = ul.children[0].cloneNode(true)
+        ul.append(li)
+        let index = 0
+
+        const lis = Array.from(document.getElementsByTagName('ul')[0].children)
+        const ols = Array.from(document.getElementsByTagName('ol')[0].children)
+        const left = document.getElementsByClassName('left')[0]
+        const right = document.getElementsByClassName('right')[0]
+        const carousel = document.getElementsByClassName('carousel')[0]
+
+        // 右点击
+        right.onclick = () => {
+            if (index < lis.length - 2) {
+                index++
+                move(index)
+            } else if (index === lis.length - 2) {
+                // 无缝轮播实现
+                index++
+                ul.style.left = -(index) * 100 + 'vw'
+                document.getElementsByClassName('bg-red')[0].classList.remove('bg-red')
+                ols[0].classList.add('bg-red')
+            } else {
+                ul.style.transition = 'none'
+                index = 0
+                ul.style.left = '0vw'
+
+                setTimeout(() => {
+                    ul.style.transition = 'all .3s'
+                    index++
+                    move(index)
+                }, 10)
+            }
+        }
+
+        // 左点击
+        left.onclick = () => {
+            if (index > 0) {
+                index--
+                move(index)
+
+            } else {
+                // 无缝轮播实现
+                ul.style.transition = 'none'
+                console.log(lis.length);
+                index = lis.length - 1
+                ul.style.left = -(index) * 100 + 'vw'
+
+                setTimeout(() => {
+                    ul.style.transition = 'all .3s'
+                    index--
+                    move(index)
+                }, 10)
+            }
+
+        }
+
+        // 下方点击跳转对应图片
+        ols.forEach((v, i) => {
+            v.onclick = () => {
+                move(i)
+                index = i
+            }
+        })
+
+        // 轮播效果函数
+        function move(i) {
+            ul.style.left = -(i) * 100 + 'vw'
+
+            document.getElementsByClassName('bg-red')[0].classList.remove('bg-red')
+            ols[i].classList.add('bg-red')
+        }
+
+        // 自动播放
+        let timer = setInterval(() => {
+            right.onclick()
+        }, 3000)
+
+
+        // 鼠标悬停定时器停止函数
+        function stop(ele) {
+            ele.onmouseenter = () => {
+                clearInterval(timer)
+            }
+
+            ele.onmouseleave = () => {
+                timer = setInterval(() => {
+                    right.onclick()
+                }, 3000)
+            }
+        }
+
+        // 下方悬停
+        stop(ol)
+
+        // 左按钮悬停
+        stop(document.getElementsByClassName('left-conent')[0])
+
+        // 右按钮悬停
+        stop(document.getElementsByClassName('right-conent')[0])
+
+    </script>
+</body>
+
+</html>
