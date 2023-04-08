@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .wrapper {
+        width: 1300px;
+        margin: 0 auto;
+        /* display: flex; */
+        /* justify-content: space-between; */
+    }
+
+    .wrapper::after {
+        content: '';
+        clear: both;
+        display: block;
+    }
+
+    .list {
+        width: 240px;
+        margin: 0px 25px 10px 0px;
+        float: left;
+    }
+
+    .list:last-child {
+        margin-right: 0px;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        transition: all .3s;
+    }
+
+    .list .img {
+        width: 100%;
+        margin-bottom: 15px;
+        overflow: hidden;
+        border-radius: 20px;
+        box-shadow: 0 3px 6px rgb(0 0 0 / 25%);
+        border: 10px solid #fff;
+        display: flex;
+    }
+
+
+    .list .img img:hover {
+        transform: scale(1.2);
+    }
+
+    .loading {
+        width: 260px;
+        height: 150px;
+        border-radius: 30px;
+        background-color: rgb(0, 0, 0, .6);
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+        text-align: center;
+    }
+
+    .show {
+        display: block;
+    }
+
+    .loading p {
+        width: 100%;
+        text-align: center;
+        color: #fff;
+        position: absolute;
+        left: 50%;
+        top: 70%;
+        transform: translate(-50%, 0%);
+    }
+
+    .loader {
+        display: inline-block;
+        font-size: 10px;
+        width: 1em;
+        height: 1em;
+        border-radius: 50%;
+        text-indent: -9999em;
+        animation: mulShdSpin 1.1s infinite ease;
+        transform: translateZ(0);
+        margin-top: 50px;
+    }
+
+    @keyframes mulShdSpin {
+
+        0%,
+        100% {
+            box-shadow: 0em -2.6em 0em 0em #ffffff, 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.5), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.7);
+        }
+
+        12.5% {
+            box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.7), 1.8em -1.8em 0 0em #ffffff, 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.5);
+        }
+
+        25% {
+            box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.5), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.7), 2.5em 0em 0 0em #ffffff, 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+        }
+
+        37.5% {
+            box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.5), 2.5em 0em 0 0em rgba(255, 255, 255, 0.7), 1.75em 1.75em 0 0em #ffffff, 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+        }
+
+        50% {
+            box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.5), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.7), 0em 2.5em 0 0em #ffffff, -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+        }
+
+        62.5% {
+            box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.5), 0em 2.5em 0 0em rgba(255, 255, 255, 0.7), -1.8em 1.8em 0 0em #ffffff, -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+        }
+
+        75% {
+            box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.5), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.7), -2.6em 0em 0 0em #ffffff, -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+        }
+
+        87.5% {
+            box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.5), -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em #ffffff;
+        }
+    }
+</style>
+
+<body>
+    <div class="wrapper">
+        <div class="list"></div>
+        <div class="list"></div>
+        <div class="list"></div>
+        <div class="list"></div>
+        <div class="list"></div>
+    </div>
+
+    <div class="loading">
+        <span class="loader"></span>
+        <p>加载中...</p>
+    </div>
+
+    <script src="./data.js"></script>
+
+    <script>
+        let lists = document.getElementsByClassName('list')
+        const loading = document.getElementsByClassName('loading')[0]
+
+        // 获取瀑布流图片
+        let list = []
+        while (list.length < lists.length) {
+            list.push({
+                height: 0,
+                imgList: []
+            })
+        }
+
+        let min = list[0]
+        data.forEach((v, i) => {
+            list.forEach((val, ind) => {
+                if (val.height < min.height) {
+                    min = val
+                }
+            })
+
+            min.height += +v.constHeight
+            min.imgList.push(v)
+        })
+
+        // 屏幕滚动距离
+        let index = 1
+        // 记录上次加载图片索引
+        let imgIndex = [0, 0, 0, 0, 0]
+        // 默认调用一次渲染函数
+        render(index, imgIndex)
+        renderImg()
+        // 判断延迟器是否开启
+        let isBool = true
+
+        // 开启定时器实时判断图片是否在可视区域
+        setInterval(() => {
+            renderImg()
+        }, 500)
+
+        // 监听页面滚动
+        window.onscroll = () => {
+            const scrollTop = document.body.scrollTop || document.documentElement.scrollTop
+
+            if (scrollTop + window.innerHeight + 10 >= document.body.clientHeight) {
+
+
+                // 延迟器 延迟秒后渲染
+                if (isBool) {
+                    isBool = false
+                    // 显示加载动画
+                    loading.classList.add('show')
+                    index++
+                    setTimeout(() => {
+                        isBool = true
+                        render(index, imgIndex)
+                        // 隐藏加载动画
+                        loading.classList.remove('show')
+                    }, 2000)
+                }
+            }
+        }
+
+
+        // 渲染页面添加loading图 设置图片高度
+        function render(index, imgIndex) {
+            Array.from(lists).forEach((v, i) => {
+                for (let j = imgIndex[i]; j < list[i].imgList.length; j++) {
+                    if (v.clientHeight < 2000 * index) {
+                        let div = document.createElement('div')
+                        div.classList.add('img')
+                        div.innerHTML = `<img src="./loading.gif" alt="" style="height: ${list[i].imgList[j].constHeight}px;" referrerpolicy="no-referrer">`
+                        v.append(div)
+                    } else {
+                        imgIndex[i] = j
+                        break
+                    }
+                }
+            })
+        }
+
+
+        // 替换loading图 渲染图片
+        function renderImg() {
+            const scrollTop = document.body.scrollTop || document.documentElement.scrollTop
+            lists = document.getElementsByClassName('list')
+            Array.from(lists).forEach((v, i) => {
+                Array.from(v.children).forEach((val, ind) => {
+                    if (!v.getAttribute('finish') && scrollTop + window.innerHeight >= val.offsetTop)
+                        val.children[0].src = list[i].imgList[ind].imgUrl
+                        val.setAttribute('finish', 'true')
+                })
+            })
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    ul {
+        width: 902px;
+        height: 600px;
+        border: 1px solid;
+        margin: 50px auto;
+        list-style: none;
+        position: relative;
+    }
+
+    li {
+        position: absolute;
+        width: 300px;
+        height: 200px;
+        border: 1px solid red;
+        background-image: url(https://w.wallhaven.cc/full/we/wallhaven-we15j6.jpg);
+        background-size: 900px 600px;
+        transition: all .3s;
+        background-position: 0 0;
+    }
+
+    .blank {
+        background-image: none;
+        background-color: #fff;
+        border: 1px solid #fff;
+        z-index: -1;
+    }
+
+    .img {
+        width: 150px;
+        height: 100px;
+        background-image: url(https://w.wallhaven.cc/full/we/wallhaven-we15j6.jpg);
+        background-size: 150px 100px;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 150px;
+        height: 50px;
+        border: none;
+        background-color: #0052D9;
+        border-radius: 20px;
+        color: #fff;
+        margin-bottom: 10px;
+    }
+
+    .menu {
+        width: 150px;
+        position: fixed;
+        top: 50%;
+        right: 80px;
+        transform: translate(-0%, -50%);
+        text-align: center;
+        color: #0052D9;
+    }
+
+    .ranks {
+        width: 150px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    input {
+        width: 50px;
+        border: 1px solid #0052D9;
+        text-align: center;
+        outline-style: none;
+        border-radius: 5px;
+    }
+</style>
+
+<body>
+
+    <ul>
+
+    </ul>
+
+    <div class="menu">
+        <div class="img"></div>
+        <button>还原</button>
+        <button>重置</button>
+        <div class="ranks">
+            行: <input type="text" value="3">
+            列: <input type="text" value="3">
+        </div>
+        <button>开始游戏</button>
+        <p>步数:<span class="text">0</span></p>
+    </div>
+
+    <script>
+
+        let imgList = [
+            'https://w.wallhaven.cc/full/we/wallhaven-we15j6.jpg',
+            'https://w.wallhaven.cc/full/zy/wallhaven-zyz76v.jpg',
+            'https://w.wallhaven.cc/full/rr/wallhaven-rrggz7.jpg',
+            'https://w.wallhaven.cc/full/2y/wallhaven-2yzpkg.jpg',
+            'https://w.wallhaven.cc/full/p9/wallhaven-p9llq3.jpg'
+        ]
+
+        let url = imgList[Math.floor(Math.random() * imgList.length)]
+
+        const text = document.getElementsByClassName('text')[0]
+        let arr = []
+        let newArr = []
+        let count = 0
+        text.innerHTML = count
+
+        for (let i = 0; i < 9; i++) {
+            arr.push([i % 3, Math.floor(i / 3)])
+        }
+
+
+        // 默认拼图顺序
+        randerLis(document.getElementsByTagName('input')[0].value, document.getElementsByTagName('input')[1].value)
+        const lis = document.getElementsByTagName('li')
+        Array.from(lis).forEach((v, i) => {
+            v.style.left = v.clientWidth * arr[i][0] + 'px'
+            v.style.backgroundPositionX = -v.clientWidth * arr[i][0] + 'px'
+            v.style.backgroundPositionY = -v.clientHeight * arr[i][1] + 'px'
+            v.style.top = v.clientHeight * arr[i][1] + 'px'
+        })
+        // 默认清除事件监听
+        removeLis()
+
+
+
+        // 添加菜单点击事件
+        const menus = document.getElementsByTagName('button')
+        // 判断是否点击开始游戏
+        let isBool = false
+        // 点击还原
+        menus[0].onclick = () => {
+            count = 0
+            text.innerHTML = count
+            const lis = document.getElementsByTagName('li')
+            Array.from(lis).forEach((v, i) => {
+                v.style.left = v.clientWidth * arr[i][0] + 'px'
+                v.style.top = v.clientHeight * arr[i][1] + 'px'
+            })
+
+            menus[2].innerHTML = '开始游戏'
+            removeLis()
+            isBool = false
+        }
+
+        // 点击重置
+        menus[1].onclick = () => {
+            if (isBool) {
+                count = 0
+                text.innerHTML = count
+
+                randerLis(document.getElementsByTagName('input')[0].value, document.getElementsByTagName('input')[1].value)
+
+            }
+        }
+
+        // 点击开始游戏
+        menus[2].onclick = () => {
+            isBool = !isBool
+            if (isBool) {
+                menus[2].innerHTML = '结束游戏'
+
+                menus[1].onclick()
+            } else {
+                menus[2].innerHTML = '开始游戏'
+                removeLis()
+            }
+        }
+
+
+        // 渲染数据函数
+        function randerLis(row, line) {
+            arr = []
+            let newArr = []
+            let amount = row * line
+            for (let i = 0; i < amount; i++) {
+                arr.push([i % row, Math.floor(i / row)])
+                newArr.push([i % row, Math.floor(i / row)])
+            }
+            document.getElementsByClassName('img')[0].style.backgroundImage = `url(${url})`
+            document.getElementsByTagName('ul')[0].innerHTML = ''
+            arr.forEach((v, i) => {
+                let li = document.createElement('li')
+                li.style.backgroundImage = `url(${url})`
+                li.style.width = document.getElementsByTagName('ul')[0].clientWidth / row + 'px'
+                li.style.height = document.getElementsByTagName('ul')[0].offsetHeight / line + 'px'
+                document.getElementsByTagName('ul')[0].append(li)
+            })
+            // 打乱顺序
+            const lis = document.getElementsByTagName('li')
+            Array.from(lis).forEach((v, i) => {
+                let index = Math.floor(Math.random() * newArr.length)
+                // 设置背景位置  图片位置
+                v.style.backgroundPositionX = -v.clientWidth * arr[i][0] + 'px'
+                v.style.backgroundPositionY = -v.clientHeight * arr[i][1] + 'px'
+                v.style.left = v.clientWidth * newArr[index][0] + 'px'
+                v.style.top = v.clientHeight * newArr[index][1] + 'px'
+                newArr.splice(index, 1)
+            })
+            // 随机一块白色区域
+            lis[arr.length - 1].classList.add('blank')
+            lis[arr.length - 1].style.backgroundImage = 'none'
+            // 添加点击事件
+            addLis(arr.length - 1)
+            // 键盘事件
+            addKeyup()
+        }
+
+
+
+        // 添加点击事件函数
+        function addLis(ind) {
+            const lis = document.getElementsByTagName('li')
+            Array.from(lis).forEach((v, i) => {
+                v.onclick = () => {
+                    // 当前点击元素和空白元素是否在一行
+                    if (v.offsetTop === lis[ind].offsetTop && Math.abs(v.offsetLeft - lis[ind].offsetLeft) < parseInt(v.style.width)) {
+
+                        changePosition(v, lis[ind])
+                        // 判断是否成功
+                        succeed()
+                        // 当前点击元素和空白元素是否在一列
+                    } else if (v.offsetLeft === lis[ind].offsetLeft && Math.abs(v.offsetTop - lis[ind].offsetTop) < parseInt(v.style.height)) {
+
+                        changePosition(v, lis[ind])
+
+                        // 判断是否成功
+                        succeed()
+                    }
+                }
+            })
+        }
+
+
+        // 添加键盘事件
+        function addKeyup() {
+            document.onkeyup = function (e) {
+                console.log(e.keyCode);
+                if (e.keyCode === 87 || e.keyCode === 38) {
+                    moveY(-1, document.getElementsByTagName('input')[0].value, lis[arr.length - 1]);
+                    // 判断是否成功
+                    succeed()
+                } else if (e.keyCode === 83 || e.keyCode === 40) {
+                    moveY(1, document.getElementsByTagName('input')[0].value, lis[arr.length - 1]);
+                    // 判断是否成功
+                    succeed()
+                } else if (e.keyCode === 65 || e.keyCode === 37) {
+                    moveX(-1, document.getElementsByTagName('input')[0].value, lis[arr.length - 1]);
+                    // 判断是否成功
+                    succeed()
+                } else if (e.keyCode === 68 || e.keyCode === 39) {
+                    moveX(1, document.getElementsByTagName('input')[0].value, lis[arr.length - 1]);
+                    // 判断是否成功
+                    succeed()
+                }
+            };
+        }
+
+        // 水平移动
+        function moveX(x, row, ele) {
+            const lis = document.getElementsByTagName('li')
+            let flag = null
+            if (x === 1) {
+                flag = ele.offsetLeft < lis[0].clientWidth * (row - 1)
+            } else if (x === -1) {
+                flag = ele.offsetLeft > 0
+            }
+
+            if (flag) {
+                let targetLi = Array.from(lis).find((v) => {
+
+                    return v.offsetTop === ele.offsetTop && v.offsetLeft === ele.offsetLeft + x * v.clientWidth
+                });
+
+                changePosition(ele, targetLi)
+            }
+        }
+
+        // 垂直移动
+        function moveY(x, row, ele) {
+            const lis = document.getElementsByTagName('li')
+
+            let flag = null
+            if (x === 1) {
+                flag = ele.offsetTop < lis[0].clientHeight * (row - 1)
+            } else if (x === -1) {
+                flag = ele.offsetTop > 0
+            }
+
+            if (flag) {
+                let targetLi = Array.from(lis).find((v) => {
+                    console.log(ele.offsetLeft + x * v.offsetWidth);
+                    console.log(v.offsetLeft);
+                    return v.offsetLeft === ele.offsetLeft && v.offsetTop === ele.offsetTop + x * v.clientHeight
+                });
+                console.log(targetLi);
+                changePosition(ele, targetLi)
+            }
+        }
+
+        // 交换两个元素的位置
+        function changePosition(e1, e2) {
+            var tempX = e1.style.left;
+            var tempY = e1.style.top;
+            e1.style.left = e2.style.left;
+            e1.style.top = e2.style.top;
+            e2.style.left = tempX;
+            e2.style.top = tempY;
+            count++
+            text.innerHTML = count
+        }
+
+        // 清除事件监听
+        function removeLis() {
+            Array.from(lis).forEach((v, i) => {
+                v.onclick = null
+            })
+            document.onkeyup = null
+        }
+
+
+        // 判断是否成功
+        function succeed() {
+            let num = 0
+            const lis = document.getElementsByTagName('li')
+            Array.from(lis).forEach((v, i) => {
+
+                if (parseInt(v.style.left) === v.clientWidth * arr[i][0] && parseInt(v.style.top) === v.clientHeight * arr[i][1]) {
+                    num++
+                } else {
+                    return false
+                }
+            })
+            if (num === lis.length) {
+                isBool = !isBool
+                menus[2].innerHTML = '开始游戏'
+                removeLis()
+                setTimeout(() => {
+                    alert('成功')
+                }, 300)
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

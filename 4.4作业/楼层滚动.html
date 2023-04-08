@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        background-color: #f5f5f5;
+        scroll-behavior: smooth;
+    }
+
+    ul {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 1100px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+
+
+    h1 {
+        width: 100%;
+        padding: 30px;
+        font-size: 28px;
+        text-align: center;
+        background-color: #fff;
+        margin-bottom: 20px;
+    }
+
+    li {
+        width: 360px;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        margin-bottom: 10px;
+    }
+
+    li .text {
+        padding: 20px 30px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    li img {
+        width: 100%;
+    }
+
+    li span {
+        font-size: 14px;
+        color: #F7A701;
+    }
+
+    li p {
+        font-size: 12px;
+        color: #BF9E6B;
+    }
+
+    li h3 {
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    .nav {
+        position: fixed;
+        top: 50%;
+        right: 50px;
+        width: 150px;
+        transform: translate(0%, -50%);
+        background-color: #fff;
+        box-shadow: 8px 8px 16px #bebebe,
+            -8px -8px 16px #ffffff;
+        border-radius: 20px;
+        overflow: hidden;
+        font-size: 14px;
+    }
+
+    .nav p {
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        cursor: pointer;
+        transition: all .3s;
+    }
+
+    .nav p:hover {
+        background-color: #AB7FD1;
+        color: #fff;
+    }
+
+    .bg {
+        background-color: #AB7FD1;
+        color: #fff;
+    }
+</style>
+
+<body>
+
+    <div class="box">
+        <!-- 导航 -->
+        <div class="nav">
+        </div>
+    </div>
+
+
+
+    <script src="./data.js"></script>
+    <script>
+        // 创建ul
+        const box = document.getElementsByClassName('box')[0]
+        data.forEach((v, i) => {
+            let ul = document.createElement('ul')
+            ul.classList.add('list')
+            box.append(ul)
+        })
+
+
+        // 渲染数据
+        const lists = document.getElementsByClassName('list')
+        const nav = document.getElementsByClassName('nav')[0]
+        data.forEach((v, i) => {
+            let h1 = document.createElement('h1')
+            let p = document.createElement('p')
+            h1.innerHTML = v.type
+            p.innerHTML = v.type
+            lists[i].append(h1)
+            nav.append(p)
+
+            v.goodList.forEach((val, ind) => {
+                let li = document.createElement('li')
+                li.innerHTML = `
+                <img src="${val.imgUrl}" alt="">
+
+                    <div class="text">
+                <span><b>￥</b>${val.price}</span>
+                <p>${val.store}</p>
+             <h3>${val.title}</h3>
+                </div>
+                `
+                lists[i].append(li)
+            })
+        })
+
+
+        // 绑定事件
+        const h1s = document.getElementsByTagName('h1')
+        // 导航
+        const ps = document.getElementsByClassName('nav')[0].children
+        let index = 0
+        // 导航点击事件
+        Array.from(ps).forEach((v, i) => {
+            v.onclick = () => {
+                ps[index].classList.remove('bg')
+                v.classList.add('bg')
+                v.classList.add('bg')
+                index = i
+                h1s[i].scrollIntoView(true)
+            }
+        })
+
+        let isBool = true
+        // 监听页面滚动
+        window.onscroll = () => {
+            if (isBool) {
+                Array.from(h1s).forEach((v, i) => {
+                    if (v.getBoundingClientRect().top - 10 <= 0) {
+                        ps[index].classList.remove('bg')
+                        ps[i].classList.add('bg')
+                        index = i
+                    }
+                })
+            }
+        }
+
+        // 鼠标悬浮导航栏，关闭页面监听
+        nav.onmouseenter = (e) => {
+            isBool = false
+        }
+
+        nav.onmouseleave = (e) => {
+            isBool = true
+            window.onscroll()
+        }
+
+        window.onscroll()
+
+    </script>
+</body>
+
+</html>

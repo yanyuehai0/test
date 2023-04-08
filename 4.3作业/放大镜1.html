@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #box{
+            display: flex;
+        }
+
+        .img{
+            width: 240px;
+            height: 330px;
+            position: relative;
+            background-image: url(https://gd-hbimg.huaban.com/37f50feb12e1c0f9b5587f91ef68a5f954974df121fd6c-kCtPlD_fw240webp);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .mask{
+            width: 120px;
+            height: 120px;
+            background-color: rgb(0, 0, 0, .3);
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .max-img{
+            width: 360px;
+            height: 360px;
+            background-image: url(https://gd-hbimg.huaban.com/37f50feb12e1c0f9b5587f91ef68a5f954974df121fd6c-kCtPlD_fw240webp);
+            background-size: 720px auto;
+            background-repeat: no-repeat;
+            background-position: 0 0;
+            display: none;
+        }
+
+        .show{
+            display: block;
+        }
+
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+<body>
+<div id="box">
+    <div class="img">
+        <div class="mask"></div>
+    </div>
+
+    <div class="max-img">
+    </div>
+</div>
+
+
+<script>
+    const img = document.getElementsByClassName('img')[0]
+    const imgMax = document.getElementsByClassName('max-img')[0]
+    const mask = document.getElementsByClassName('mask')[0]
+
+
+
+    img.onmousemove = (e) =>{
+        let x = e.clientX - img.clientLeft
+        let y = e.clientY - img.clientTop
+
+        imgMax.classList.add('show')
+
+        if(x < mask.clientWidth / 2){
+            x = mask.clientWidth / 2
+        }else if (x > img.clientWidth - mask.clientWidth / 2){
+            x = img.clientWidth - mask.clientWidth / 2
+        }
+
+        if(y < mask.clientHeight / 2){
+            y = mask.clientHeight / 2
+        }else if (y > img.clientHeight - mask.clientHeight / 2){
+            y = img.clientHeight - mask.clientHeight / 2
+        }
+
+        mask.style.left = x - mask.clientWidth / 2 + 'px'
+        mask.style.top = y - mask.clientHeight / 2 + 'px'
+
+        imgMax.style.backgroundPositionX = x * -3  + mask.clientWidth / 2 * 3 + 'px'
+        imgMax.style.backgroundPositionY = y * -3 + mask.clientHeight / 2 * 3 + 'px'
+
+    }
+
+    let isBool = true
+    img.onmouseleave = () =>{
+        if(isBool){
+            isBool = false
+            setTimeout(() => {
+                imgMax.classList.remove('show')
+                isBool = true
+            }, 2000)
+        }
+    }
+
+</script>
+</body>
+</html>

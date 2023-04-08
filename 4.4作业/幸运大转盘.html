@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    #box {
+        width: 1100px;
+        display: flex;
+        position: relative;
+        margin: 0 auto;
+    }
+
+    .bg1 {
+        position: absolute;
+        left: 67px;
+        top: 117px;
+        width: 510px;
+        height: 510px;
+        background-image: url(./img/bg.png);
+        z-index: 5;
+    }
+
+    .bg2 {
+        position: absolute;
+        left: 25px;
+        top: 70px;
+        width: 600px;
+        height: 600px;
+        background-image: url(./img/bg2.png);
+    }
+
+    .bg3 {
+        position: absolute;
+        left: 220px;
+        top: 265px;
+        width: 200px;
+        height: 200px;
+        background-image: url(./img/bg3.png);
+        z-index: 6;
+    }
+
+    .bg4 {
+        width: 600px;
+        height: 670px;
+        background-image: url(./img/bg4.jpg);
+        background-size: contain;
+    }
+
+    .bg5 {
+        width: 500px;
+        height: 670px;
+        background-image: url(./img/bg5.jpg);
+        background-size: contain;
+        /* transform: rotateX(36deg); */
+    }
+
+    .text {
+        position: absolute;
+        top: 67%;
+        left: 67%;
+        transform: translate(-0%, -50%);
+        width: 200px;
+        height: 280px;
+        z-index: 10;
+        text-align: center;
+        line-height: 30px;
+        color: #F7A701;
+        font-size: 18px;
+        overflow: auto;
+    }
+</style>
+
+<body>
+    <div id="box">
+        <div class="bg4">
+            <div class="bg1"></div>
+            <div class="bg2"></div>
+            <div class="bg3"></div>
+        </div>
+        <div class="bg5">
+            <div class="text">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const bg3 = document.getElementsByClassName('bg3')[0]
+        const text = document.getElementsByClassName('text')[0]
+        let arr = ['红包500', '飞利浦净化器', '红包50', '行李箱', '红包100', 'iphone X']
+        let isBool = true
+        let deg = 0
+        bg3.onclick = () => {
+            deg = deg % 360
+            num = rendom(3000, 1000)
+            if (isBool) {
+                isBool = false
+                requestAnimationFrame(fn)
+                function fn() {
+                    deg += 3
+                    if (deg > num) {
+                        let p = document.createElement('p')
+                        if(!Math.ceil((num % 360 - 28) / 60)){
+                            p.innerHTML = arr[arr.length - 1]
+                        }else{
+                            p.innerHTML = arr[Math.ceil((num % 360 - 28) / 60) - 1]
+                        }
+                        isBool = true
+                        return text.append(p)
+                    }
+                    bg3.style.transform = `rotateZ(${deg}deg)`
+                    requestAnimationFrame(fn)
+                }
+
+            }
+        }
+
+
+        function rendom(max, min = 0) {
+            return Math.floor(Math.random() * (max - min + 1)) + min
+        }
+
+    </script>
+</body>
+
+</html>

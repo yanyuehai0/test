@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    select {
+        padding: 5px 10px;
+    }
+</style>
+
+<body>
+
+    <select name="" id="">
+        <!-- <option>部门</option> -->
+    </select>
+
+    <select name="" id="">
+
+    </select>
+
+    <select name="" id="">
+
+    </select>
+
+    <script src="./recursion.js"></script>
+    <script>
+        let data = []
+        // 处理数据
+        arr.forEach((v, i) => {
+            let isBool = !data.find((val, ind) => {
+                return v.TYPE === val.typeOne
+            })
+            if (isBool) {
+                data.push({
+                    typeOne: v.TYPE,
+                    children: []
+                })
+            }
+        })
+
+        arr.forEach((v, i) => {
+
+            data.forEach((val, ind) => {
+                let isBool = !val.children.find((val, ind) => {
+                    return v.DEPNAME === val.typeTwo
+                })
+
+                if (isBool) {
+                    val.children.push({
+                        typeTwo: v.DEPNAME,
+                        depId: v.DEPID,
+                        children: []
+                    })
+                }
+            })
+        })
+
+
+        arr.forEach((v, i) => {
+            data.forEach((val, ind) => {
+                if (v.TYPE === val.typeOne) {
+                    val.children.forEach((value, index) => {
+                        if (v.DEPNAME === value.typeTwo) {
+                            value.children.push({
+                                staffId: v.STAFFID,
+                                staffName: v.STAFFNAME
+                            })
+                        }
+                    })
+                }
+            })
+        })
+
+        console.log(data);
+
+        // 渲染数据
+        const selects = document.getElementsByTagName('select')
+
+        data.forEach((v, i) => {
+            let option = document.createElement('option')
+            option.innerHTML = v.typeOne
+            selects[0].append(option)
+        })
+
+        // 部门
+        let typeTwo
+        selects[0].onchange = () => {
+            selects[1].innerHTML = ''
+            data.forEach((v, i) => {
+                if (v.typeOne === selects[0].value) {
+                    typeTwo = v.children
+
+                    randerData(typeTwo, selects[1], 'typeTwo')
+
+                }
+
+
+            })
+            selects[1].onchange()
+        }
+
+        // 员工或部门
+        selects[1].onchange = () => {
+            selects[2].innerHTML = ''
+            typeTwo.forEach((v, i) => {
+                if (v.typeTwo === selects[1].value) {
+
+                    randerData(v.children, selects[2], 'staffName')
+
+                }
+            })
+        }
+
+
+        // 渲染数据函数
+        function randerData(arr, el, k) {
+            if (arr.length !== 0) {
+                arr.forEach((val, ind) => {
+                    let option = document.createElement('option')
+                    option.innerHTML = val[k]
+                    el.append(option)
+                })
+            } else {
+                let option = document.createElement('option')
+                option.innerHTML = '无'
+                el.append(option)
+            }
+        }
+
+        // 默认执行一次change事件
+        selects[0].onchange()
+
+    </script>
+</body>
+
+</html>
