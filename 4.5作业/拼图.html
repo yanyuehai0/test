@@ -132,10 +132,10 @@
         randerLis(document.getElementsByTagName('input')[0].value, document.getElementsByTagName('input')[1].value)
         const lis = document.getElementsByTagName('li')
         Array.from(lis).forEach((v, i) => {
-            v.style.left = v.clientWidth * arr[i][0] + 'px'
-            v.style.backgroundPositionX = -v.clientWidth * arr[i][0] + 'px'
-            v.style.backgroundPositionY = -v.clientHeight * arr[i][1] + 'px'
-            v.style.top = v.clientHeight * arr[i][1] + 'px'
+            v.style.left = v.offsetWidth * arr[i][0] + 'px'
+            v.style.backgroundPositionX = -v.offsetWidth * arr[i][0] + 'px'
+            v.style.backgroundPositionY = -v.offsetHeight * arr[i][1] + 'px'
+            v.style.top = v.offsetHeight * arr[i][1] + 'px'
         })
         // 默认清除事件监听
         removeLis()
@@ -152,8 +152,8 @@
             text.innerHTML = count
             const lis = document.getElementsByTagName('li')
             Array.from(lis).forEach((v, i) => {
-                v.style.left = v.clientWidth * arr[i][0] + 'px'
-                v.style.top = v.clientHeight * arr[i][1] + 'px'
+                v.style.left = v.offsetWidth * arr[i][0] + 'px'
+                v.style.top = v.offsetHeight * arr[i][1] + 'px'
             })
 
             menus[2].innerHTML = '开始游戏'
@@ -200,7 +200,7 @@
             arr.forEach((v, i) => {
                 let li = document.createElement('li')
                 li.style.backgroundImage = `url(${url})`
-                li.style.width = document.getElementsByTagName('ul')[0].clientWidth / row + 'px'
+                li.style.width = document.getElementsByTagName('ul')[0].offsetWidth / row + 'px'
                 li.style.height = document.getElementsByTagName('ul')[0].offsetHeight / line + 'px'
                 document.getElementsByTagName('ul')[0].append(li)
             })
@@ -209,10 +209,10 @@
             Array.from(lis).forEach((v, i) => {
                 let index = Math.floor(Math.random() * newArr.length)
                 // 设置背景位置  图片位置
-                v.style.backgroundPositionX = -v.clientWidth * arr[i][0] + 'px'
-                v.style.backgroundPositionY = -v.clientHeight * arr[i][1] + 'px'
-                v.style.left = v.clientWidth * newArr[index][0] + 'px'
-                v.style.top = v.clientHeight * newArr[index][1] + 'px'
+                v.style.backgroundPositionX = -v.offsetWidth * arr[i][0] + 'px'
+                v.style.backgroundPositionY = -v.offsetHeight * arr[i][1] + 'px'
+                v.style.left = v.offsetWidth * newArr[index][0] + 'px'
+                v.style.top = v.offsetHeight * newArr[index][1] + 'px'
                 newArr.splice(index, 1)
             })
             // 随机一块白色区域
@@ -232,14 +232,14 @@
             Array.from(lis).forEach((v, i) => {
                 v.onclick = () => {
                     // 当前点击元素和空白元素是否在一行
-                    if (v.offsetTop === lis[ind].offsetTop && Math.abs(v.offsetLeft - lis[ind].offsetLeft) < parseInt(v.style.width)) {
+
+                    if (v.offsetTop === lis[ind].offsetTop && Math.abs(v.offsetLeft - lis[ind].offsetLeft) <= v.offsetWidth) {
 
                         changePosition(v, lis[ind])
                         // 判断是否成功
                         succeed()
                         // 当前点击元素和空白元素是否在一列
-                    } else if (v.offsetLeft === lis[ind].offsetLeft && Math.abs(v.offsetTop - lis[ind].offsetTop) < parseInt(v.style.height)) {
-
+                    } else if (v.offsetLeft === lis[ind].offsetLeft && Math.abs(v.offsetTop - lis[ind].offsetTop) <= v.offsetHeight) {
                         changePosition(v, lis[ind])
 
                         // 判断是否成功
@@ -253,7 +253,7 @@
         // 添加键盘事件
         function addKeyup() {
             document.onkeyup = function (e) {
-                console.log(e.keyCode);
+
                 if (e.keyCode === 87 || e.keyCode === 38) {
                     moveY(-1, document.getElementsByTagName('input')[0].value, lis[arr.length - 1]);
                     // 判断是否成功
@@ -279,7 +279,7 @@
             const lis = document.getElementsByTagName('li')
             let flag = null
             if (x === 1) {
-                flag = ele.offsetLeft < lis[0].clientWidth * (row - 1)
+                flag = ele.offsetLeft < lis[0].offsetWidth * (row - 1)
             } else if (x === -1) {
                 flag = ele.offsetLeft > 0
             }
@@ -287,7 +287,7 @@
             if (flag) {
                 let targetLi = Array.from(lis).find((v) => {
 
-                    return v.offsetTop === ele.offsetTop && v.offsetLeft === ele.offsetLeft + x * v.clientWidth
+                    return v.offsetTop === ele.offsetTop && v.offsetLeft === ele.offsetLeft + x * v.offsetWidth
                 });
 
                 changePosition(ele, targetLi)
@@ -300,18 +300,17 @@
 
             let flag = null
             if (x === 1) {
-                flag = ele.offsetTop < lis[0].clientHeight * (row - 1)
+                flag = ele.offsetTop < lis[0].offsetHeight * (row - 1)
             } else if (x === -1) {
                 flag = ele.offsetTop > 0
             }
 
             if (flag) {
                 let targetLi = Array.from(lis).find((v) => {
-                    console.log(ele.offsetLeft + x * v.offsetWidth);
-                    console.log(v.offsetLeft);
-                    return v.offsetLeft === ele.offsetLeft && v.offsetTop === ele.offsetTop + x * v.clientHeight
+
+                    return v.offsetLeft === ele.offsetLeft && v.offsetTop === ele.offsetTop + x * v.offsetHeight
                 });
-                console.log(targetLi);
+
                 changePosition(ele, targetLi)
             }
         }
